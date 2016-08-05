@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_top_product_"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@color/bgListView"
+    tools:context="app.gianglong.tracuudienthoai.Activity.TopProduct_Activity">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lvTopProduct"
+        android:background="@color/white"
+        android:dividerHeight="7dp">
+
+    </ListView>
+</android.support.constraint.ConstraintLayout>

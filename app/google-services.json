@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "602545672645",
+    "firebase_url": "https://tracuudienthoai.firebaseio.com",
+    "project_id": "tracuudienthoai",
+    "storage_bucket": "tracuudienthoai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602545672645:android:781fc54aaf7bf758",
+        "android_client_info": {
+          "package_name": "app.gianglong.tracuudienthoai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602545672645-cn6aubc76ofrgdia1g1srd6fkfu8dn4s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBO-_M8tw_fNApDtRX2iRpU02DwRhtx27o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

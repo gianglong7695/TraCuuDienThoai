@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="app.gianglong.tracuudienthoai">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".ImageLoader.AppController"
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.SearchProduct_Activity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Activity.ShowProduct_Activity" />
+        <activity android:name=".Activity.TopProduct_Activity" />
+        <activity android:name=".Activity.ViewByProduct_Activity" />
+        <activity
+            android:name=".Activity.ViewBy_Activity"
+            android:label="@string/title_activity_view_by_"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <receiver android:name=".Other.BroadcastReceiverChangeNetwork">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

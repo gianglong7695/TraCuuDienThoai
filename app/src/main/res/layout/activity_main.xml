@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="app.gianglong.tracuudienthoai.MainActivity"
+    android:orientation="vertical"
+    android:background="@color/mainBG">
+
+    <TextView
+        android:id="@+id/tvLogo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Tra cứu SmartPhone"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_weight="1"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.5"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal"
+            android:text="Tìm kiếm mới"
+            android:layout_marginTop="20dp"
+            android:id="@+id/btSearch"
+            android:background="@drawable/custom_button"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal"
+            android:text="Xem theo"
+            android:background="@drawable/custom_button"
+            android:layout_marginTop="20dp"
+            android:id="@+id/btViewBy"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal"
+            android:text="Top 10 tìm kiếm"
+            android:background="@drawable/custom_button"
+            android:layout_marginTop="20dp"
+            android:id="@+id/btTopProduct"/>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal"
+            android:text="Cập nhật dữ liệu"
+            android:background="@drawable/custom_button"
+            android:layout_marginTop="20dp"
+            android:id="@+id/btUpdateData"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>
