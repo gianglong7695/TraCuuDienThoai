@@ -214,13 +214,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
         myRef.child("product_id").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 Map<String, String> value = (Map<String, String>) dataSnapshot.getValue();
                 arrCount.add(new CountObjectProduct(dataSnapshot.getKey(), Integer.parseInt(value.get("count"))));
-                //handleText(dataSnapshot.toString());
+
             }
 
             @Override
@@ -304,15 +305,5 @@ public class MainActivity extends AppCompatActivity {
         return isConnect;
     }
 
-
-//    public void loadingData(){
-//        if(sizeProduct != 0){
-//            progressDialog.show();
-//
-//            if(arrCount.){
-//
-//            }
-//        }
-//    }
 
 }

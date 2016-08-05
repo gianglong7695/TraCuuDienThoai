@@ -14,8 +14,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -35,7 +34,13 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Activity.Introduct_activity"></activity>
+        <activity android:name=".Activity.Introduct_activity" />
+        <activity android:name=".Activity.SplashScreen_activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

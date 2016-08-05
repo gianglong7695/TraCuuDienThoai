@@ -90,9 +90,13 @@ public class ListAdapter_top_product extends BaseAdapter{
                 positionID = j;
             }
         }
-        tvViews.setText(MainActivity.arrCount.get(positionID).getCount() + "");
 
 
+        try {
+            tvViews.setText(MainActivity.arrCount.get(positionID).getCount() + "");
+        } catch ( Exception e ) {
+            tvViews.setText("");
+        }
 
         return view;
     }

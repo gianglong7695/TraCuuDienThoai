@@ -12,4 +12,5 @@
     <color name="bgListView">#e5e5e5</color>
     <color name="gray">#9e9e9e</color>
     <color name="background">#a9a9a9</color>
+    <color name="bg_SplashScreen">#673ab7</color>
 </resources>
