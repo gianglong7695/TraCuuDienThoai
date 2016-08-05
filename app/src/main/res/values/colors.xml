@@ -10,4 +10,6 @@
     <color name="black">#212121</color>
     <color name="red1">#d61414</color>
     <color name="bgListView">#e5e5e5</color>
+    <color name="gray">#9e9e9e</color>
+    <color name="background">#a9a9a9</color>
 </resources>

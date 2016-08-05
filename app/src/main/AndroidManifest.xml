@@ -27,13 +27,15 @@
         <activity
             android:name=".Activity.ViewBy_Activity"
             android:label="@string/title_activity_view_by_"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <receiver android:name=".Other.BroadcastReceiverChangeNetwork">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".Activity.Introduct_activity"></activity>
     </application>
 
 </manifest>

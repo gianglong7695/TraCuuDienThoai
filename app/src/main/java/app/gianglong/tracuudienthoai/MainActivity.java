@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Map;
 
+import app.gianglong.tracuudienthoai.Activity.Introduct_activity;
 import app.gianglong.tracuudienthoai.Activity.SearchProduct_Activity;
 import app.gianglong.tracuudienthoai.Activity.TopProduct_Activity;
 import app.gianglong.tracuudienthoai.Activity.ViewBy_Activity;
@@ -38,7 +40,7 @@ import static app.gianglong.tracuudienthoai.Other.MyString.SQL_CREATE_TABLE;
 
 public class MainActivity extends AppCompatActivity {
     public static MainActivity mActivity;
-    Button btSearch, btTopProduct, btUpdate, btViewBy;
+    Button btSearch, btTopProduct, btUpdate, btViewBy, btIntroduct;
     TextView tvLogo;
     String url = "http://gianglong7695.tk/Application/TraCuuDienThoai/ProductInfomation.json";
     public static Database db;
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     public static DatabaseReference myRef;
     public static DatabaseReference mySizeFirebase;
     public static int sizeProduct = 0;
-
+    Snackbar mSnackbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -170,6 +172,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btIntroduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(getApplicationContext(), Introduct_activity.class);
+                startActivity(it);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+            }
+        });
+
     }
 
 
@@ -178,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
         btTopProduct = (Button) findViewById(R.id.btTopProduct);
         btUpdate = (Button) findViewById(R.id.btUpdateData);
         btViewBy = (Button)findViewById(R.id.btViewBy);
+        btIntroduct = (Button) findViewById(R.id.btIntroduct);
         tvLogo = (TextView) findViewById(R.id.tvLogo);
         // Set font
         mTypeface = Typeface.createFromAsset(getAssets(), "FiolexGirlVH.ttf");
@@ -268,7 +280,19 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if(BroadcastReceiverChangeNetwork.isCheckNetwork){
-                        MainActivity.mActivity.setContentView(R.layout.activity_main);
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    }else{
+                        mSnackbar = Snackbar.make(view, "Xin vui lòng bật Wifi hoặc 3G ", Snackbar.LENGTH_LONG);
+                        mSnackbar.setAction("Hiểu", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mSnackbar.dismiss();
+                            }
+                        });
+                        mSnackbar.show();
                     }
                 }
             });

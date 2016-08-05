@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 
 import app.gianglong.tracuudienthoai.Other.SlidingTabLayout;
@@ -41,5 +42,11 @@ public class ViewBy_Activity extends AppCompatActivity {
         mSlidingTabLayout.setCustomTabView(R.layout.tab_view, R.id.tv_tab);
         mSlidingTabLayout.setViewPager(mViewPager);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search_activity_, menu);
+        return true;
     }
 }

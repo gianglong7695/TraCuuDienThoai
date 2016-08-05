@@ -5,6 +5,7 @@
     tools:context="app.gianglong.tracuudienthoai.Fragment.Fragment_view_price">
 
     <ListView
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/lvPriceProduct">

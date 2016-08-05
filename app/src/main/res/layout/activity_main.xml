@@ -64,6 +64,15 @@
             android:layout_marginTop="20dp"
             android:id="@+id/btUpdateData"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_horizontal"
+            android:text="Thông tin ứng dụng"
+            android:background="@drawable/custom_button"
+            android:layout_marginTop="20dp"
+            android:id="@+id/btIntroduct"/>
+
 
     </LinearLayout>
 
