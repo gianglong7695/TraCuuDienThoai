@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:background="@color/bgListView"
+    android:background="@color/white"
     tools:context="app.gianglong.tracuudienthoai.Activity.TopProduct_Activity">
 
     <ListView
@@ -13,7 +13,8 @@
         android:layout_height="match_parent"
         android:id="@+id/lvTopProduct"
         android:background="@color/white"
-        android:dividerHeight="7dp">
+        android:dividerHeight="7dp"
+        android:divider="@color/white">
 
     </ListView>
 </android.support.constraint.ConstraintLayout>

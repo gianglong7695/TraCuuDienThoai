@@ -2,14 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/layout_view_price"
-    tools:context="app.gianglong.tracuudienthoai.Fragment.Fragment_view_price">
+    tools:context="app.gianglong.tracuudienthoai.Fragment.Fragment_view_favorite">
 
+    <!-- TODO: Update blank fragment layout -->
     <ListView
-        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/lvPriceProduct">
+        android:id="@+id/lvFavorite">
 
     </ListView>
+
 </FrameLayout>

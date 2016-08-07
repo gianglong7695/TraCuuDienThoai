@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         db = new Database(this);
         db.queryData(SQL_CREATE_TABLE); // Tạo bảng nếu chưa có
         db.queryData(MyString.SQL_HISTORY);
+        db.queryData(MyString.SQL_FAVORITE);
         arrl = new ArrayList<>();
         arrCount = new ArrayList<>();
         alTopProduct = new ArrayList<>();
@@ -98,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.dismiss();
+                    finish();
                 }
             });
             builder.setPositiveButton("Tất nhiên", new DialogInterface.OnClickListener() {
@@ -109,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
             });
 
             builder.setCancelable(false);
-
             builder.create().show();
         }
 
@@ -141,6 +143,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent it = new Intent(MainActivity.this, TopProduct_Activity.class);
                 startActivity(it);
+
+                Toast.makeText(MainActivity.this,  db.getFavorite().size() + "", Toast.LENGTH_SHORT).show();
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
             }
         });

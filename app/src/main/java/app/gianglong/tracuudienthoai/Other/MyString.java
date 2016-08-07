@@ -53,6 +53,7 @@ public class MyString {
             ")";
 
     public static final String SQL_HISTORY = "Create table if not exists tbl_history(_stt INTEGER PRIMARY KEY, ten text)";
+    public static final String SQL_FAVORITE = "Create table if not exists tbl_favorite(_index INTEGER PRIMARY KEY, id text, type integer)";
     // Max 20 row ?
 //    public static final String DATABASE_ROW_UPDATE = "update";
 //    public static final String DATABASE_ROW_AUTHER = "auther";

@@ -10,6 +10,7 @@ public class ProductObject implements Serializable{
     private static final long serialVersionUID = 1L;
     String id, name, company, image, color, price, link;
     int year;
+    boolean isChecked = false;
     ParameterObject parameterObject;
 
     public ProductObject(){
@@ -98,5 +99,13 @@ public class ProductObject implements Serializable{
 
     public void setParameterObject(ParameterObject parameterObject) {
         this.parameterObject = parameterObject;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

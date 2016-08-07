@@ -2,6 +2,7 @@ package app.gianglong.tracuudienthoai.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -16,6 +17,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import java.util.ArrayList;
 
 import app.gianglong.tracuudienthoai.ImageLoader.AppController;
+import app.gianglong.tracuudienthoai.MainActivity;
 import app.gianglong.tracuudienthoai.Objects.ProductObject;
 import app.gianglong.tracuudienthoai.R;
 
@@ -30,6 +32,8 @@ public class ShowProduct_Activity extends AppCompatActivity {
     ListView lvLink;
     ArrayList<String> arrLink;
     ImageLoader mImageLoader;
+    Menu mMenu;
+    MenuItem item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,9 @@ public class ShowProduct_Activity extends AppCompatActivity {
         parameter_layout.setVisibility(View.GONE); // Ẩn parameter layout
         arrLink = new ArrayList<>();
 
+        // Set icon like
+
+        //
 
         if(mImageLoader == null){
 
@@ -97,6 +104,17 @@ public class ShowProduct_Activity extends AppCompatActivity {
             onBackPressed();
             overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
         }
+        if(item.getItemId() ==  R.id.action_like){
+            item = mMenu.findItem((R.id.action_like));
+
+            if(MainActivity.db.isExistFavorite(object.getId())){
+                MainActivity.db.deleteFavorite(object.getId());
+                item.setIcon(R.drawable.star_gray);
+            }else{
+                item.setIcon(R.drawable.star_yellow);
+                MainActivity.db.insertFavorite(object.getId(), 1 , MainActivity.db.getFavorite());
+            }
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -123,4 +141,19 @@ public class ShowProduct_Activity extends AppCompatActivity {
         lvLink = (ListView) findViewById(R.id.lvLink);
         //pbProduct = (ProgressBar) findViewById(R.id.pbProduct);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        mMenu = menu;
+        getMenuInflater().inflate(R.menu.menu_show_product, menu);
+
+        item = mMenu.findItem((R.id.action_like));
+        if(MainActivity.db.isExistFavorite(object.getId())){
+            item.setIcon(R.drawable.star_yellow);
+        }else{
+            item.setIcon(R.drawable.star_gray);
+        }
+        return  true;
+    }
+
 }

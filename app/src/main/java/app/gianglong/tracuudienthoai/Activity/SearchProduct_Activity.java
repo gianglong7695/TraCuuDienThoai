@@ -149,13 +149,17 @@ public class SearchProduct_Activity extends AppCompatActivity {
                     }
                 }
                 firebase = FirebaseDatabase.getInstance().getReference("count").child("product_id");
-                int count = getCountProduct(arrlProduct.get(position).getId());
-                Map<String, String> user = new HashMap<String, String>();
-                user.put("count", String.valueOf(++count));
+                int count = 0;
+                if(arrCount.size() > 0){
+                    count = getCountProduct(arrlProduct.get(position).getId());
+                    Map<String, String> user = new HashMap<String, String>();
+                    user.put("count", String.valueOf(++count));
 
-                firebase.child(arrlProduct.get(position).getId()).setValue(user);
+                    firebase.child(arrlProduct.get(position).getId()).setValue(user);
+
+                }
+                
                 object = arrlProduct.get(position);
-
                 db.addHistory(listHistory.get(i));
                 db.addHistorySearching(listHistory.get(i));
 

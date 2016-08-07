@@ -11,6 +11,7 @@ import android.text.Spanned;
 import android.text.style.ImageSpan;
 
 import app.gianglong.tracuudienthoai.Fragment.Fragment_view_company;
+import app.gianglong.tracuudienthoai.Fragment.Fragment_view_favorite;
 import app.gianglong.tracuudienthoai.Fragment.Fragment_view_price;
 import app.gianglong.tracuudienthoai.R;
 
@@ -19,8 +20,8 @@ import app.gianglong.tracuudienthoai.R;
  */
 public class TabAdapter extends FragmentPagerAdapter{
     Context mContext;
-    String[] titles = {"Comporation", "Money"};
-    int [] icons = {R.drawable.copyright, R.drawable.coin};
+    String[] titles = {"Comporation", "Money", "Favorite"};
+    int [] icons = {R.drawable.ic_copyright_white_24dp, R.drawable.ic_attach_money_white_24dp, R.drawable.ic_favorite_border_white_24dp};
     int heightIcon;
 
     public TabAdapter(FragmentManager fm, Context c) {
@@ -42,6 +43,10 @@ public class TabAdapter extends FragmentPagerAdapter{
             case 1:
                 mFragment = new Fragment_view_price();
                 break;
+            case 2:
+                mFragment = new Fragment_view_favorite();
+                break;
+
         }
 
         Bundle b = new Bundle();

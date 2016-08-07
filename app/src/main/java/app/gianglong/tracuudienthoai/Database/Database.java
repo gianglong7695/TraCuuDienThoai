@@ -8,10 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 import app.gianglong.tracuudienthoai.Activity.SearchProduct_Activity;
-import app.gianglong.tracuudienthoai.MainActivity;
+import app.gianglong.tracuudienthoai.Objects.FavoriteObject;
 import app.gianglong.tracuudienthoai.Objects.ParameterObject;
 import app.gianglong.tracuudienthoai.Objects.ProductObject;
 import app.gianglong.tracuudienthoai.Other.MyString;
+
+import static app.gianglong.tracuudienthoai.MainActivity.arrl;
 
 /**
  * Created by Giang Long on 7/22/2016.
@@ -108,6 +110,8 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
+
+
     public ArrayList getProductName(){
         ArrayList listName = new ArrayList();
         Cursor c = getData("Select * from " + MyString.DATABASE_TABLE_NAME);
@@ -126,7 +130,7 @@ public class Database extends SQLiteOpenHelper {
             parameter = new ParameterObject(c.getString(5), c.getString(6), c.getString(7), c.getString(8), c.getString(9),c.getString(10),c.getString(11), c.getString(12), c.getString(13),c.getString(14), c.getString(15), c.getString(16));
             productObject = new ProductObject(c.getString(0), c.getString(1), c.getString(2), c.getString(3), c.getInt(4), parameter, c.getString(17), c.getString(18), c.getString(19));
             SearchProduct_Activity.arrlProduct.add(productObject);
-            MainActivity.arrl.add(productObject);
+            arrl.add(productObject);
         }
 
         return productObject;
@@ -159,9 +163,63 @@ public class Database extends SQLiteOpenHelper {
         database.delete("tbl_history", null, null);
     }
 
+    public void insertFavorite(String id, int type, ArrayList<FavoriteObject> arrCheck){
+        boolean isExist = false;
+        for (int i = 0 ; i < arrCheck.size(); i++){
+            if(id.equals(arrCheck.get(i).getId())){
+                isExist = true;
+            }
+        }
+        if (!isExist){
+            String sql = "Insert into tbl_favorite values(null, '"+ id +"'," + type +")";
+            queryData(sql);
+        }
+    }
 
+    public ArrayList<FavoriteObject> getFavorite(){
+        ArrayList<FavoriteObject> list = new ArrayList();
+        Cursor c = getData("Select * from tbl_favorite");
+        while (c.moveToNext()){
+            list.add(new FavoriteObject(c.getString(1), c.getInt(2)));
+        }
+        return list;
 
-//    ParameterObject object = new ParameterObject(c.getString(5), c.getString(6), c.getString(7), c.getString(8), c.getString(9), c.getString(10), c.getString(11), c.getString(12), c.getString(13), c.getString(14), c.getString(15), c.getString(16));
-//    MainActivity.arrl.add(new ProductObject(c.getString(0), c.getString(1), c.getString(2), c.getString(3), Integer.parseInt(c.getString(4)), object, c.getString(17), c.getString(18), c.getString(19)));
+    }
+
+    public boolean isExistFavorite(String id){
+        boolean isExist = false;
+        for (int i = 0 ; i < getFavorite().size(); i++){
+            if(id.equals(getFavorite().get(i).getId())){
+                isExist = true;
+            }
+        }
+
+        return  isExist;
+    }
+
+    public void deleteFavorite(String id){
+        open();
+        database.delete("tbl_favorite", "id=?", new String[]{id});
+    }
+
+//    public boolean updateFavorite(String id, int type) {
+//        open();
+//        boolean isOke = false;
+//        ContentValues values = new ContentValues();
+//        values.put("id", id);
+//        values.put("type", type);
+//
+//        int result = database.update("tbl_favorite", values, "id=?", new String[]{id});
+//
+//        if(result == 0){
+//            isOke = false;
+//        }else{
+//            isOke = true;
+//        }
+//
+//
+//        return isOke;
+//    }
+
 
 }

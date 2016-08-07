@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 
 import app.gianglong.tracuudienthoai.ImageLoader.AppController;
 import app.gianglong.tracuudienthoai.MainActivity;
+import app.gianglong.tracuudienthoai.Objects.CountObjectProduct;
 import app.gianglong.tracuudienthoai.Objects.ProductObject;
 import app.gianglong.tracuudienthoai.R;
 
@@ -23,17 +25,19 @@ import app.gianglong.tracuudienthoai.R;
  * Created by Giang Long on 7/28/2016.
  */
 
-public class ListAdapter_top_product extends BaseAdapter{
+public class ListAdapter_top_product extends BaseAdapter {
     private Activity mActivity;
     private LayoutInflater mInflater;
     private ArrayList<ProductObject> mItems;
+    ArrayList<CountObjectProduct> alCount = new ArrayList<>();
 
     ImageLoader mImageLoader = AppController.getmInstance().getmImageLoader();
 
-    public ListAdapter_top_product(Activity activity, ArrayList<ProductObject> list){
+    public ListAdapter_top_product(Activity activity, ArrayList<ProductObject> list) {
         this.mActivity = activity;
         this.mItems = list;
     }
+
     @Override
     public int getCount() {
         return 10;
@@ -51,53 +55,89 @@ public class ListAdapter_top_product extends BaseAdapter{
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        if(mInflater == null){
+        final ViewHolder viewHolder;
+        alCount = MainActivity.arrCount;
+        if (mInflater == null) {
             mInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
-        if(view == null){
+        if (view == null) {
             view = mInflater.inflate(R.layout.custom_row_top_product, null);
 
+            viewHolder = new ViewHolder();
+            viewHolder.mImageView = (NetworkImageView) view.findViewById(R.id.row_ivLogo);
+            viewHolder.title = (TextView) view.findViewById(R.id.row_tvName);
+            viewHolder.ivStart = (ImageView) view.findViewById(R.id.row_ivFavorite);
+            viewHolder.progress = (ProgressBar) view.findViewById(R.id.pg_loadingImage);
+
+            view.setTag(viewHolder);
+
+        } else {
+            viewHolder = (ViewHolder) view.getTag();
         }
 
-        if(mImageLoader == null){
+        if (mImageLoader == null) {
             mImageLoader = AppController.getmInstance().getmImageLoader();
-        }
-        NetworkImageView mImageView = (NetworkImageView) view.findViewById(R.id.row_ivLogo);
-        TextView title= (TextView) view.findViewById(R.id.row_tvName);
-        final ImageView ivStart = (ImageView) view.findViewById(R.id.row_ivFavorite);
-        //getting data for row
-        ProductObject item = mItems.get(i);
-        mImageView.setImageUrl(item.getImage(), mImageLoader);
-        //title
-        title.setText(item.getName());
 
-        ivStart.setOnClickListener(new View.OnClickListener() {
+        }
+
+        //getting data for row
+        final ProductObject item = mItems.get(i);
+        viewHolder.mImageView.setImageUrl(item.getImage(), mImageLoader);
+        viewHolder.progress.setVisibility(View.GONE);
+        //title
+        viewHolder.title.setText(item.getName());
+
+        if(MainActivity.db.isExistFavorite(item.getId())){
+            item.setChecked(true);
+        }
+
+
+        if (item.isChecked()) {
+            viewHolder.ivStart.setImageResource(R.drawable.star_yellow);
+        } else {
+            viewHolder.ivStart.setImageResource(R.drawable.star_gray);
+        }
+
+        viewHolder.ivStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ivStart.getDrawable().getConstantState() == ivStart.getResources().getDrawable(R.drawable.star_gray).getConstantState()){
-                    ivStart.setImageResource(R.drawable.star_yellow);
-                }else{
-                    ivStart.setImageResource(R.drawable.star_gray);
+                if (item.isChecked()) {
+                    item.setChecked(false);
+                    MainActivity.db.deleteFavorite(item.getId());
+                } else {
+                    item.setChecked(true);
+                    MainActivity.db.insertFavorite(item.getId(), 1, MainActivity.db.getFavorite());
                 }
+                notifyDataSetChanged();
             }
         });
 
 
         int positionID = 0;
         TextView tvViews = (TextView) view.findViewById(R.id.tvViews);
-        for (int j = 0; j < MainActivity.arrCount.size(); j++) {
-            if (item.getId().toString().equals(MainActivity.arrCount.get(j).getId())) {
+        for (int j = 0; j <alCount.size(); j++) {
+            if (item.getId().toString().equals(alCount.get(j).getId())) {
                 positionID = j;
             }
         }
 
 
         try {
-            tvViews.setText(MainActivity.arrCount.get(positionID).getCount() + "");
-        } catch ( Exception e ) {
+            tvViews.setText(alCount.get(positionID).getCount() + "");
+        } catch (Exception e) {
             tvViews.setText("");
         }
 
         return view;
+    }
+
+
+    static class ViewHolder {
+        NetworkImageView mImageView;
+        TextView title;
+        ImageView ivStart;
+        ProgressBar progress;
+
+
     }
 }
